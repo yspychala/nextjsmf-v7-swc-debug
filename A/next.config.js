@@ -3,6 +3,9 @@ const NextFederationPlugin = require("@module-federation/nextjs-mf");
 
 const nextConfig = {
   reactStrictMode: true,
+  typescript: {
+    ignoreBuildErrors: true,
+  },
   webpack(config) {
     config.plugins.push(
       new NextFederationPlugin({

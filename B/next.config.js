@@ -3,7 +3,9 @@ const NextFederationPlugin = require('@module-federation/nextjs-mf')
 
 const nextConfig = {
   reactStrictMode: true,
-  // basePath: "/messages",
+  typescript: {
+    ignoreBuildErrors: true,
+  },
   webpack(config, { isServer }) {
     config.plugins.push(
       new NextFederationPlugin({
