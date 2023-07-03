@@ -6,15 +6,17 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  webpack(config) {
+  webpack(config, { isServer }) {
     config.plugins.push(
       new NextFederationPlugin({
-        name: "A",
+        name: "myHost",
         filename: "static/chunks/remoteEntry.js",
-        remotes: {},
-        exposes: {
-          "./Header": "./src/components/Header.tsx",
+        remotes: {
+          myRemote: `myRemote@http://localhost:3000/_next/static/${
+            isServer ? "ssr" : "chunks"
+          }/remoteEntry.js`,
         },
+        exposes: {},
         shared: {},
       })
     );
@@ -23,4 +25,4 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig
+module.exports = nextConfig;

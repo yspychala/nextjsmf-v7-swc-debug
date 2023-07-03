@@ -1,8 +1,8 @@
 import React from "react";
-// import { Header } from "A/Header";
+// import { Header } from "myRemote/Header";
 
 const Header = React.lazy(() =>
-  import("A/Header").then((mod) => {
+  import("myRemote/Header").then((mod) => {
     return { default: mod.Header };
   })
 );

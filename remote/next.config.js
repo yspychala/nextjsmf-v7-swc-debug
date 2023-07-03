@@ -1,22 +1,20 @@
 /** @type {import('next').NextConfig} */
-const NextFederationPlugin = require('@module-federation/nextjs-mf')
+const NextFederationPlugin = require("@module-federation/nextjs-mf");
 
 const nextConfig = {
   reactStrictMode: true,
   typescript: {
     ignoreBuildErrors: true,
   },
-  webpack(config, { isServer }) {
+  webpack(config) {
     config.plugins.push(
       new NextFederationPlugin({
-        name: "B",
+        name: "myRemote",
         filename: "static/chunks/remoteEntry.js",
-        remotes: {
-          A: `A@http://localhost:3000/_next/static/${
-            isServer ? "ssr" : "chunks"
-          }/remoteEntry.js`,
+        remotes: {},
+        exposes: {
+          "./Header": "./src/components/Header.tsx",
         },
-        exposes: {},
         shared: {},
       })
     );
@@ -25,4 +23,4 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig
+module.exports = nextConfig;
